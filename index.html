@@ -58,21 +58,28 @@
       width: 60px;
       height: 60px;
       background: url('assets/butterfly_graphic.png') no-repeat center / contain;
-      animation:
-        fly-diagonal 20s linear forwards,
-        flap-wings 1.2s ease-in-out infinite;
+      animation: fly-up 20s linear forwards, flap 1s ease-in-out infinite, shimmer 6s linear infinite;
       filter: drop-shadow(0 0 8px #fff5f5);
       z-index: 9991;
+      will-change: transform;
     }
 
-    @keyframes fly-diagonal {
-      0% { transform: translate(0, 0); opacity: 1; }
-      100% { transform: translate(120vw, -120vh); opacity: 0; }
+    @keyframes fly-up {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-150vh) rotate(0deg); opacity: 0; }
     }
 
-    @keyframes flap-wings {
-      0%, 100% { transform: scaleY(1); }
-      50% { transform: scaleY(0.9); }
+    @keyframes flap {
+      0%, 100% { transform: scaleX(1) rotate(0deg); }
+      50% { transform: scaleX(-1) rotate(0deg); }
+    }
+
+    @keyframes shimmer {
+      0% { filter: hue-rotate(0deg); }
+      25% { filter: hue-rotate(60deg); }
+      50% { filter: hue-rotate(120deg); }
+      75% { filter: hue-rotate(180deg); }
+      100% { filter: hue-rotate(360deg); }
     }
 
     #nextBtn {
@@ -137,16 +144,14 @@
   }
 
   function createButterflies(container) {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 25; i++) {
       const butterfly = document.createElement('div');
       butterfly.classList.add('butterfly-fly');
-      const hue = Math.floor(Math.random() * 360);
-      butterfly.style.left = `${Math.random() * 10}vw`;
-      butterfly.style.bottom = `${Math.random() * 10}vh`;
-      butterfly.style.filter = `hue-rotate(${hue}deg) brightness(1.1)`;
-      butterfly.style.animationDuration = `${15 + Math.random() * 10}s`;
+      butterfly.style.left = `${Math.random() * 100}vw`;
+      butterfly.style.top = `${80 + Math.random() * 20}vh`;
+      butterfly.style.animationDuration = `${20 + Math.random() * 10}s`;
       container.appendChild(butterfly);
-      setTimeout(() => butterfly.remove(), 25000);
+      setTimeout(() => butterfly.remove(), 30000);
     }
   }
 
