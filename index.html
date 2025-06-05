@@ -34,13 +34,21 @@
       pointer-events: auto;
     }
 
-    /* 🎨 First slide dreamy background */
+    /* 🎨 First slide dreamy background - stretched fully */
     .slide:first-child {
-      background: url('./assets/birthday-collage.png') no-repeat center center / cover;
+      background: url('assets/birthday-collage.png') center center / 100% 100% no-repeat;
       position: relative;
     }
 
-    /* Removed the ::before overlay to make background image fully visible */
+    .slide:first-child::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(4px);
+      z-index: 0;
+    }
 
     .slide:first-child h1,
     .slide:first-child p {
