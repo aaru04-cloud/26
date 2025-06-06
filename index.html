@@ -21,9 +21,8 @@
       width: 100%; height: 100%;
       border-radius: 1.5rem;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       padding: 3rem;
       opacity: 0;
       transition: opacity 0.8s ease-in-out;
@@ -32,6 +31,44 @@
     .slide.active {
       opacity: 1;
       pointer-events: auto;
+    }
+
+    .slide:first-child {
+      background: transparent;
+      position: relative;
+    }
+
+    .slide:first-child::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      z-index: 0;
+    }
+
+    .slide:first-child h1,
+    .slide:first-child p {
+      z-index: 2;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .slide-content {
+      flex: 1;
+      z-index: 2;
+    }
+
+    .slide-image {
+      flex-shrink: 0;
+      width: 350px;
+      height: auto;
+      max-height: 90%;
+      margin-left: 2rem;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 40px 20px rgba(255,255,255,0.6);
+      border-radius: 1rem;
     }
 
     .glitter-container, .butterfly-container {
@@ -106,21 +143,17 @@
 <body>
 <div id="app">
   <div id="slides">
-    <!-- ✅ UPDATED SLIDE 1 with IMAGE on RIGHT SIDE -->
-    <section class="slide active" style="display: flex; justify-content: space-between; align-items: center;">
-      <div style="flex: 1; z-index: 1; padding-right: 2rem;">
+    <section class="slide active">
+      <div class="slide-content">
         <h1>Happy Birthday 🎉</h1>
         <p>Wishing you a day full of love, laughter, and magic.</p>
       </div>
-      <div style="flex: 0 0 auto; z-index: 1; display: flex; justify-content: flex-end; align-items: center; max-height: 100vh;">
-        <img src="assets/birthday-collage.png" alt="Birthday Collage"
-          style="max-height: 80vh; max-width: 100%; border-radius: 1rem; box-shadow: 0 0 60px 20px white;" />
-      </div>
+      <img src="assets/birthday-collage.png" alt="Birthday Collage" class="slide-image" />
       <div class="glitter-container"></div>
       <div class="butterfly-container"></div>
     </section>
 
-    <!-- REST OF THE SLIDES UNCHANGED -->
+    <!-- Other slides (unchanged) -->
     <section class="slide"><h2>Month 1 — The Beginning 💖</h2><p>Our sweet start, full of hope and warm glances.</p><div class="glitter-container"></div><div class="butterfly-container"></div></section>
     <section class="slide"><h2>Month 2 — Growing Closer 💕</h2><p>Every moment together feels like sun-kissed warmth.</p><div class="glitter-container"></div><div class="butterfly-container"></div></section>
     <section class="slide"><h2>Month 3 — So Many Memories 🌸</h2><p>Dreamy days and tender moments we cherish forever.</p><div class="glitter-container"></div><div class="butterfly-container"></div></section>
